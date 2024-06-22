@@ -22,4 +22,3 @@ jobs:
       run: | 
         chmod 777 gradlew
         ./gradlew build
-        
