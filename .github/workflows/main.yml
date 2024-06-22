@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonacion de codigo
+      uses: actions/checkout@v4
+      
+    - name: setup Java JDK
+      uses: actions/setup-java@v4.2.1
+      with:
+        distribution: 'temurin'
+        java-version: '8'
+    
+    - name: Compilation Maven
+      run: mvn package
+      
+    - name: Ejecutar pruebas y generar informe de cobertura
+      run: mvn clean verify
+
+    - name: Crear PDF del informe de cobertura
+      run: mvn pdf:pdf
+
+    - name: Crear artefacto de Jacoco
+      uses: actions/upload-artifact@v2
+      with:
+        name: jacoco-report
+        path: target/
+        
+      # se agrega el mismo uses pero con distinto  java-version Para compatibilizar con sonarCloud (solo acepta java 17)
+    - name: setup Java JDK
+      uses: actions/setup-java@v4.2.1
+      with:
+        distribution: 'temurin'
+        java-version: '17'
