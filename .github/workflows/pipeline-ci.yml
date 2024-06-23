@@ -68,6 +68,8 @@ jobs:
                 echo "Otro tipo de proyecto"
              fi
 
+    - name: Update Dependencies
+      run: npm update
 
 
     - name: NPM Audit
