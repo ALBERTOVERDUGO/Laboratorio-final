@@ -17,8 +17,11 @@ jobs:
 
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Verificar contenido del directorio raíz
+      run: ls -la
     
     - name: Build
       run: | 
         chmod 777 gradlew
-        ../src/gradlew build
+        ./gradlew build
