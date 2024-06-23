@@ -97,13 +97,13 @@ jobs:
           --enableRetired
 
     - name: Upload Test result
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@v2
       with:
         name: Depcheck report
         path: ${{github.workspace}}/reports
 
     - name: Upload JAR
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@v2
       with:
         name: JAR
         path: ${{github.workspace}}/build/libs/LaboratorioApp.jar
@@ -125,7 +125,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         
     - name: Download JAR
-      uses: actions/download-artifact@master
+      uses: actions/download-artifact@v2
       with:
         name: JAR
         path: ${{github.workspace}}
