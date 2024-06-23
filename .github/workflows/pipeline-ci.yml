@@ -21,4 +21,4 @@ jobs:
     - name: Build
       run: | 
         chmod 777 gradlew
-        /src/gradlew build
+        ../src/gradlew build
