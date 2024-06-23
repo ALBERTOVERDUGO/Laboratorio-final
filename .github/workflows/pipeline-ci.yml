@@ -84,9 +84,6 @@ jobs:
           echo "Otro tipo de proyecto"
           fi
 
-    - name: Install dependencies
-      run: npm install
-
     - name: Run Dependency Check
       id: depcheck
       uses: dependency-check/Dependency-Check_Action@1.1.0
