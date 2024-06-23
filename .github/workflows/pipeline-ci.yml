@@ -121,7 +121,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: report-Nuevo
-        path: target/
+        path: dist/
 
 
 # Docker Build Image ----------------------------------------
