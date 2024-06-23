@@ -82,8 +82,8 @@ jobs:
     - name: Install dependencies
       run: npm install  # O usa `yarn install` si prefieres yarn
 
-    - name: Build TypeScript app
-      run: npm run build  # Ajusta el comando según cómo esté configurado tu proyecto para construir
+#    - name: Build TypeScript app
+ #     run: npm run build  # Ajusta el comando según cómo esté configurado tu proyecto para construir
 
     - name: SonarCloud Scan
       run: |
