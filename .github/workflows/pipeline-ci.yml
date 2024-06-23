@@ -71,6 +71,13 @@ jobs:
       run: | 
         chmod 777 gradlew
 
+      # se agrega el mismo uses pero con distinto  java-version Para compatibilizar con sonarCloud (solo acepta java 17)
+    - name: setup Java JDK
+      uses: actions/setup-java@v4.2.1
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
     - name: Analisis SonarCloud
       run: |
           mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar \
