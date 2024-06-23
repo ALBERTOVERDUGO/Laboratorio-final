@@ -10,6 +10,7 @@ import { Footer, MainHeader } from "src/components/layouts";
 import MainLoadingScreen from "src/components/MainLoadingScreen";
 
 export default function MainLayout() {
+  const password = '123';
   const location = useLocation();
   const navigation = useNavigation();
   // console.log("Nav Stat: ", navigation.state);
