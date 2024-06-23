@@ -106,7 +106,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: JAR
-        path: ${{github.workspace}}/build/libs/spring-petclinic-2.6.0.jar
+        path: ${{github.workspace}}/build/libs/LaboratorioApp.jar
 
 # Docker Build Image ----------------------------------------
 
@@ -117,4 +117,10 @@ jobs:
 
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Docker Login
+      uses: docker/login-action@v3.0.0
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
         
