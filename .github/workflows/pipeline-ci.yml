@@ -89,8 +89,7 @@ jobs:
           -Dsonar.projectKey=${{ github.event.repository.name }} \
           -Dsonar.organization=albertoverdugo \
           -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-          -Dsonar.sources=.  # Ajusta la ubicación de las fuentes si es necesario
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
 
 #    - name: Analisis SonarCloud
  #     run: |
