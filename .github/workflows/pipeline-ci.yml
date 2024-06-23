@@ -113,16 +113,17 @@ jobs:
         name: Depcheck report
         path: ${{github.workspace}}/reports
 
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: Dist
+          path: ./dist 
+          
     - name: archivos y directorios
       run: |
            ls -R
-
-    - name: Crear artefacto 
-      uses: actions/upload-artifact@v2
-      with:
-        name: report-Nuevo
-        path: dist/
-
+           
 
 # Docker Build Image ----------------------------------------
 
