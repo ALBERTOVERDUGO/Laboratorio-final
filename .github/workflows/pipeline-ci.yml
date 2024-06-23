@@ -57,6 +57,7 @@ jobs:
        # -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
       #  -Dsonar.branch.name=feature-Alberto-Verdugo-Ponce-Laboratorio-Final
 
+#SCA -------------------------------------------
 
   SCA:
     needs: SAST
@@ -106,4 +107,14 @@ jobs:
       with:
         name: JAR
         path: ${{github.workspace}}/build/libs/spring-petclinic-2.6.0.jar
+
+# Docker Build Image ----------------------------------------
+
+  DockerBuild:
+    needs: SCA
+    runs-on: self-hosted
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v2
         
