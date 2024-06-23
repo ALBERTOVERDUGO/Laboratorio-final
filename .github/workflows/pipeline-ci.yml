@@ -124,3 +124,13 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         
+    - name: Download JAR
+      uses: actions/download-artifact@master
+      with:
+        name: JAR
+        path: ${{github.workspace}}
+
+    - name: Build Docker
+      run: |
+        docker build --tag albertoverdugo/Laboratoriodevsecops-test:latest .
+        
