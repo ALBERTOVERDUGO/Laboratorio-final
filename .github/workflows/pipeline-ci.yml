@@ -55,32 +55,28 @@ jobs:
           ls -R
 
           if [ -f "package.json" ]; then
-            echo "Utiliza package.json, proyecto Node.js o React"
-            echo "Instalando dependencias"
-            npm install
+              echo "Utiliza package.json, proyecto Node.js o React"
+              echo "Instalando dependencias"
+              npm install
 
           if grep -q '"vite"' package.json; then
              echo "Construyendo proyecto con Vite y TypeScript"
              npm run build  # Este comando ejecutará 'tsc' y 'vite build'
 
-             echo "Archivos y directorios antes de la construcción:"
-             ls -l ${{ github.workspace }}
+          if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
+              mkdir -p ${{ github.workspace }}/dist
+              cp -r dist/* ${{ github.workspace }}/dist
 
-          if [ -d "build" ] && [ "$(ls -A build)" ]; then
-             mkdir -p ${{ github.workspace }}/build
-             cp -r build/* ${{ github.workspace }}/build
+              echo "Archivos y directorios creados en 'dist/':"
+              ls -l ${{ github.workspace }}/dist
 
-            echo "Archivos y directorios creados despues de la construccion"
-           ls -l ${{ github.workspace }}
-
-          # Mostrar archivos y directorios que existen en el directorio raíz después de la construcción
-          echo "Archivos y directorios en el directorio raíz después de la construcción:"
-          ls -l ${{ github.workspace }}
+              echo "Archivos y directorios en el directorio raíz después de la construcción:"
+              ls -l ${{ github.workspace }}
           else
-          echo "El directorio 'build/' está vacío o no existe después de construir."
-          echo "Contenido actual de 'build/':"
-          ls -l ${{ github.workspace }}  # Mostrar contenido de build/ si existe pero está vacío
-          exit 1  # Terminar el script con error si no hay archivos en build/
+              echo "El directorio 'dist/' está vacío o no existe después de construir."
+              echo "Contenido actual de 'dist/':"
+              ls -l dist  # Mostrar contenido de dist/ si existe pero está vacío
+              exit 1  # Terminar el script con error si no hay archivos en dist/
           fi
           else
           echo "El proyecto no utiliza Vite o TypeScript según package.json."
@@ -89,6 +85,7 @@ jobs:
           else
           echo "Otro tipo de proyecto"
           fi
+
 
 
 
