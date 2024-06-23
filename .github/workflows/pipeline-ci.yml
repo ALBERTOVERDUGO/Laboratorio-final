@@ -79,7 +79,7 @@ jobs:
           else
           echo "El directorio 'build/' está vacío o no existe después de construir."
           echo "Contenido actual de 'build/':"
-          ls -l build  # Mostrar contenido de build/ si existe pero está vacío
+          ls -l ${{ github.workspace }}  # Mostrar contenido de build/ si existe pero está vacío
           exit 1  # Terminar el script con error si no hay archivos en build/
           fi
           else
