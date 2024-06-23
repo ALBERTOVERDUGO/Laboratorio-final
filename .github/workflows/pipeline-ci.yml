@@ -107,6 +107,13 @@ jobs:
             --enableRetired
 
 
+    - name: Upload Test result
+      uses: actions/upload-artifact@master
+      with:
+        name: Depcheck report
+        path: ${{github.workspace}}/reports
+
+
 
 
 # Docker Build Image ----------------------------------------
