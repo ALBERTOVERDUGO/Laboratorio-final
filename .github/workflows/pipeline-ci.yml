@@ -77,19 +77,16 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'  # Ajusta la versión de Node.js según tus necesidades
+        node-version: '18'  # Ajusta la versión de Node.js según tus necesidades
 
     - name: Install dependencies
       run: npm install  # O usa `yarn install` si prefieres yarn
 
-#    - name: Build TypeScript app
- #     run: npm run build  # Ajusta el comando según cómo esté configurado tu proyecto para construir
-
     - name: SonarCloud Scan
       run: |
-        npm install -g sonarqube-scanner  # Instala el escáner de SonarQube globalmente
+        npm install -g sonarqube-scanner 
         sonar-scanner \
-          -Dsonar.projectKey=ALBERTOVERDUGO_random-project-key  # Ajusta la clave del proyecto según SonarCloud
+          -Dsonar.projectKey=${{ github.event.repository.name }} \
           -Dsonar.organization=albertoverdugo \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
