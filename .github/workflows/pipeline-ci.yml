@@ -158,11 +158,11 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         
-    - name: Download JAR
+    - name: Download artifact
       uses: actions/download-artifact@v2
       with:
-        name: JAR
-        path: ${{github.workspace}}
+          name: Laboratorio-final-artifact  # Nombre del artefacto que subiste anteriormente
+          path: ./downloaded-artifact 
 
     - name: Build Docker
       run: |
