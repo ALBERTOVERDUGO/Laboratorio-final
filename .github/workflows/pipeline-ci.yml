@@ -120,12 +120,26 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-          name: Dist
-          path: ${{github.workspace}} 
-          
-    - name: archivos y directorios
-      run: |
-           ls -R ${{github.workspace}}
+          name: Laboratorio-final-artifact  # Nombre del artefacto
+          path: |
+            Dockerfile
+            Kubernetes
+            README.md
+            gradle
+            gradlew
+            gradlew.bat
+            index.html
+            package.json
+            pipeline.txt
+            public
+            reports
+            settings.gradle
+            src
+            tsconfig.json
+            tsconfig.node.json
+            vercel.json
+            vite.config.ts
+            yarn.lock
            
 
 # Docker Build Image ----------------------------------------
