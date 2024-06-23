@@ -90,7 +90,7 @@ jobs:
       env:
          JAVA_HOME: /opt/jdk
       with:
-          project: '${{ github.event.repository.name }}'
+          project: 'ALBERTOVERDUGO_Laboratorio-final'
           path: '.'
           format: 'HTML'
           out: 'reports'
