@@ -113,7 +113,9 @@ jobs:
         name: Depcheck report
         path: ${{github.workspace}}/reports
 
-
+    - name: archivos y directorios
+      run: |
+           ls -R
 
 
 # Docker Build Image ----------------------------------------
