@@ -69,9 +69,6 @@ jobs:
 
               echo "Archivos y directorios creados en 'dist/':"
               ls -l ${{ github.workspace }}/dist
-
-              echo "Archivos y directorios en el directorio raíz después de la construcción:"
-              ls -l ${{ github.workspace }}
           else
               echo "El directorio 'dist/' está vacío o no existe después de construir."
               echo "Contenido actual de 'dist/':"
