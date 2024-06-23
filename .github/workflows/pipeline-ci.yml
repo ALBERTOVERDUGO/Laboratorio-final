@@ -5,7 +5,7 @@ on:
       - feature-Alberto-Verdugo-Ponce-Laboratorio-Final
 
 jobs:        
-  SAST-Analisis-SonarCloud:
+  SAST:
     runs-on: ubuntu-latest
     steps:
 
