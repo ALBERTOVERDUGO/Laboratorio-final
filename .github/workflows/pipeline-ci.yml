@@ -64,6 +64,8 @@ jobs:
                     echo "Construyendo proyecto Node.js"
                     npm run build
                  fi
+                       mkdir -p ${{ github.workspace }}/build
+                       cp -r build/* ${{ github.workspace }}/build
              else
                 echo "Otro tipo de proyecto"
              fi
@@ -84,6 +86,10 @@ jobs:
       with:
         name: Depcheck report
         path: ${{github.workspace}}/reports
+
+    - name: Verify Build Output
+      run: |
+            ls -la ${{ github.workspace }}/build
 
     - name: Verify JAR existence
       run: ls -la ${{github.workspace}}/build/libs/
