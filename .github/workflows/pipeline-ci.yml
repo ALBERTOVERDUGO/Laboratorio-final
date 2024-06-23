@@ -65,7 +65,8 @@ jobs:
 
           if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
               mkdir -p ${{ github.workspace }}/dist
-              cp -r dist/* ${{ github.workspace }}/dist
+              
+              find dist -type f -exec cp {} ${{ github.workspace }}/dist \;
 
               echo "Archivos y directorios creados en 'dist/':"
               ls -l ${{ github.workspace }}/dist
