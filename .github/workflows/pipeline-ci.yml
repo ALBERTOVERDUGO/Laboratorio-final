@@ -51,24 +51,33 @@ jobs:
     - name: Build
       id: build
       run: |
-             pwd
-             ls -R
-             if [ -f "package.json" ]; then
-                echo "Utiliza package.json, proyecto Node.js o React"
-                echo "Instalando dependencias"
-                npm install
-                 if grep -q '"react-scripts"' package.json; then
-                    echo "Construyendo proyecto React"
-                    npm run build
-                 else
-                    echo "Construyendo proyecto Node.js"
-                    npm run build
-                 fi
-                       mkdir -p ${{ github.workspace }}/build
-                       cp -r build/* ${{ github.workspace }}/build
-             else
-                echo "Otro tipo de proyecto"
-             fi
+            pwd
+            ls -R
+
+            if [ -f "package.json" ]; then
+              echo "Utiliza package.json, proyecto Node.js o React"
+              echo "Instalando dependencias"
+              npm install
+
+              if grep -q '"vite"' package.json; then
+              echo "Construyendo proyecto con Vite y TypeScript"
+              npm run build  # Este comando ejecutará 'tsc' y 'vite build'
+
+              if [ -d "build" ] && [ "$(ls -A build)" ]; then
+              mkdir -p ${{ github.workspace }}/build
+              cp -r build/* ${{ github.workspace }}/build
+            else
+              echo "El directorio 'build/' está vacío o no existe después de construir."
+              exit 1  # Terminar el script con error si no hay archivos en build/
+            fi
+            else
+              echo "El proyecto no utiliza Vite o TypeScript según package.json."
+              exit 1  # Terminar el script con error si no se encuentra Vite en package.json
+            fi
+            else
+            echo "Otro tipo de proyecto"
+            fi
+
 
     - name: Update Dependencies
       run: npm update
