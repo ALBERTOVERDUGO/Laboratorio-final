@@ -84,25 +84,17 @@ jobs:
           echo "Otro tipo de proyecto"
           fi
 
-    - name: Run Dependency Check
-      id: depcheck
-      uses: dependency-check/Dependency-Check_Action@1.1.0
-      env:
-         JAVA_HOME: /opt/jdk
-      with:
-          project: 'ALBERTOVERDUGO_Laboratorio-final'
-          path: '.'
-          format: 'HTML'
-          out: 'reports'
-          args: >
-                --failOnCVSS 7
-                --enableRetired
+    - name: Install dependencies
+      run: npm install
 
-    - name: Upload Dependency Check report
+    - name: Run Dependency Check
+      run: npx --no-install dependency-check --project . --format HTML --output ./
+
+    - name: Archive HTML report
       uses: actions/upload-artifact@v2
-      with: 
-           name: DependencyCheckReport
-           path: ${{ github.workspace }}/reports
+      with:
+          name: dependency-check-report
+          path: dependency-check-report.html
 
 
 
