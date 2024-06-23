@@ -70,21 +70,38 @@ jobs:
     - name: Enable execution gradlew
       run: | 
         chmod 777 gradlew
+    
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      # se agrega el mismo uses pero con distinto  java-version Para compatibilizar con sonarCloud (solo acepta java 17)
-    - name: setup Java JDK
-      uses: actions/setup-java@v4.2.1
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        distribution: 'temurin'
-        java-version: '17'
+        node-version: '14'  # Ajusta la versión de Node.js según tus necesidades
 
-    - name: Analisis SonarCloud
+    - name: Install dependencies
+      run: npm install  # O usa `yarn install` si prefieres yarn
+
+    - name: Build TypeScript app
+      run: npm run build  # Ajusta el comando según cómo esté configurado tu proyecto para construir
+
+    - name: SonarCloud Scan
       run: |
-          mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar \
-          -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
-          -Dsonar.host.url=https://sonarcloud.io \
+        npm install -g sonarqube-scanner  # Instala el escáner de SonarQube globalmente
+        sonar-scanner \
+          -Dsonar.projectKey=ALBERTOVERDUGO_random-project-key  # Ajusta la clave del proyecto según SonarCloud
           -Dsonar.organization=albertoverdugo \
-          -Dsonar.projectKey=ALBERTOVERDUGO_Laboratorio-final
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.sources=.  # Ajusta la ubicación de las fuentes si es necesario
+
+#    - name: Analisis SonarCloud
+ #     run: |
+  #        mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar \
+   #       -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
+    #      -Dsonar.host.url=https://sonarcloud.io \
+     #     -Dsonar.organization=albertoverdugo \
+      #    -Dsonar.projectKey=ALBERTOVERDUGO_Laboratorio-final
 
 
   #  - name: Run SonarQube analysis
