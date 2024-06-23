@@ -167,4 +167,5 @@ jobs:
     - name: Build Docker
       run: |
         docker build --tag albertoverdugo/Laboratoriodevsecops-test:latest .
+
         
