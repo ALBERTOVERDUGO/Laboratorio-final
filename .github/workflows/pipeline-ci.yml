@@ -70,13 +70,21 @@ jobs:
     - name: Enable execution gradlew
       run: | 
         chmod 777 gradlew
-    
-    - name: Run SonarQube analysis
+
+    - name: Analisis SonarCloud
       run: |
-        ./gradlew sonarqube \
-        -Dsonar.projectKey=${{ github.event.repository.name }} \
-        -Dsonar.organization=ALBERTOVERDUGO_Laboratorio-final \
-        -Dsonar.host.url=https://sonarcloud.io \
-        -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-        -Dsonar.branch.name=feature-Alberto-Verdugo-Ponce-Laboratorio-Final
+          mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar \
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.organization=albertoverdugo \
+          -Dsonar.projectKey=ALBERTOVERDUGO_microservicio-java
+
+  #  - name: Run SonarQube analysis
+   #   run: |
+   #     ./gradlew sonarqube \
+    #    -Dsonar.projectKey=${{ github.event.repository.name }} \
+     #   -Dsonar.organization=ALBERTOVERDUGO_Laboratorio-final \
+      #  -Dsonar.host.url=https://sonarcloud.io \
+       # -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+      #  -Dsonar.branch.name=feature-Alberto-Verdugo-Ponce-Laboratorio-Final
         
