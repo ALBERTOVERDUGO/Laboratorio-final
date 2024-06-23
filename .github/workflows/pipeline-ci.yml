@@ -84,38 +84,31 @@ jobs:
           echo "Otro tipo de proyecto"
           fi
 
+    - name: Install dependencies
+      run: npm install
 
-
-
-    - name: Update Dependencies
-      run: npm update
-
-
-    - name: NPM Audit
-      id: npmaudit
-      run: |
-          npm audit --json > audit-report.json
-          npm install -g auditjs
-          auditjs -r audit-report.json -w ${{github.workspace}}/reports/dependency-check-report.html
-
-    - name: Upload Test result
-      uses: actions/upload-artifact@v2
+    - name: Run Dependency Check
+      id: depcheck
+      uses: dependency-check/Dependency-Check_Action@1.1.0
+      env:
+         JAVA_HOME: /opt/jdk
       with:
-        name: Depcheck report
-        path: ${{github.workspace}}/reports
+          project: '${{ github.event.repository.name }}'
+          path: '.'
+          format: 'HTML'
+          out: 'reports'
+          args: >
+                --failOnCVSS 7
+                --enableRetired
 
-    - name: Verify Build Output
-      run: |
-            ls -la ${{ github.workspace }}/build
-
-    - name: Verify JAR existence
-      run: ls -la ${{github.workspace}}/build/libs/
-
-    - name: Upload JAR
+    - name: Upload Dependency Check report
       uses: actions/upload-artifact@v2
-      with:
-        name: JAR
-        path: ${{github.workspace}}/build/libs/LaboratorioApp.jar
+      with: 
+           name: DependencyCheckReport
+           path: ${{ github.workspace }}/reports
+
+
+
 
 # Docker Build Image ----------------------------------------
 
