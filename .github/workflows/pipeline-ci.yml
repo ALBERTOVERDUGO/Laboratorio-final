@@ -84,21 +84,27 @@ jobs:
           echo "Otro tipo de proyecto"
           fi
 
-    - name: Install dependencies
-      run: npm install
-      
-    - name: Install dependency-check
-      run: npm install --save-dev dependency-check
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+          distribution: 'adopt'
+          java-version: '11'  # Ajusta la versión de Java según la compatibilidad con Dependency Check
 
     - name: Run Dependency Check
-      run: npx --no-install dependency-check . src/** --format HTML --output ./dependency-check-report.html --ignore-module @emotion/react,@reduxjs/toolkit
-
-
-    - name: Archive HTML report
-      uses: actions/upload-artifact@v2
+      uses: dependency-check/Dependency-Check_Action@1.1.0
+      env:
+          JAVA_HOME: ${{ env.JAVA_HOME }}
       with:
-          name: dependency-check-report
-          path: dependency-check-report.html
+          project: 'ALBERTOVERDUGO_Laboratorio-final'
+          path: '.'
+          format: 'HTML'
+          out: 'reports'
+          args: >
+            --failOnCVSS 7
+            --enableRetired
 
 
 
