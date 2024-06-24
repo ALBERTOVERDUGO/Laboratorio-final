@@ -114,18 +114,41 @@ jobs:
       with:
           project: 'ALBERTOVERDUGO_Laboratorio-final'
           path: '.'
-          format: 'HTML'
+          format: 'XML'
           out: 'reports'
           args: >
             --failOnCVSS 1.0
             --enableRetired
-
 
     - name: Upload Test result
       uses: actions/upload-artifact@v2
       with:
         name: Depcheck report
         path: ${{github.workspace}}/reports
+
+    - name: Check Vulnerabilities
+      run: |
+        # Instalar dependencias necesarias para el análisis del informe XML
+        pip install lxml
+        # Analizar el informe XML generado por Dependency-Check
+        python3 <<EOF
+        from lxml import etree
+        # Ruta al informe generado por Dependency-Check
+        report_file = 'reports/dependency-check-report.xml'
+
+        # Analizar el informe XML
+        tree = etree.parse(report_file)
+        root = tree.getroot()
+
+        # Verificar si hay vulnerabilidades con CVSS >= 3.0
+        vulnerabilities = root.xpath("//vulnerability[cvss/@score >= '3.0']")
+    
+        if vulnerabilities:
+             print("Se encontraron vulnerabilidades graves. Deteniendo el pipeline.")
+            exit(1)  # Salir con código de error para detener el pipeline
+        else:
+             print("No se encontraron vulnerabilidades graves.")
+              EOF
 
     - name: archivos y directorios
       run: |
