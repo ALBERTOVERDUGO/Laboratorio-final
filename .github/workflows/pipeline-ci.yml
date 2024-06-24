@@ -181,15 +181,15 @@ jobs:
 
 #--------------------- DAST ------------------------------------------------------
 
-  DAST: 
-    needs: DockerScan
-    runs-on: self-hosted
-    steps:
+ # DAST: 
+ #  needs: DockerScan
+ #   runs-on: self-hosted
+ #   steps:
 
-    - name: ZAP Scan
-      run: |
-           docker run -p 8095:8095 --name laboratorioDeploy -d albertoverdugo/laboratoriodevsecops-test:latest
+ #   - name: ZAP Scan
+ #     run: |
+ #          docker run -p 8095:8095 --name laboratorioDeploy -d albertoverdugo/laboratoriodevsecops-test:latest
         
-    - name: Sleep
-      run: |
-            sleep 500
+ #  - name: Sleep
+ #   run: |
+ #        sleep 500
