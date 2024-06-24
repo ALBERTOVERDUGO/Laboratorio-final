@@ -117,7 +117,7 @@ jobs:
           format: 'HTML'
           out: 'reports'
           args: >
-            --failOnCVSS 3.0
+            --failOnCVSS 1.0
             --enableRetired
 
 
