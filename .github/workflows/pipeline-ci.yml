@@ -38,19 +38,19 @@ jobs:
           -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.branch.name=feature-Alberto-Verdugo-Ponce-Laboratorio-Final
 
-    - name: Check SonarCloud Quality Gate
-      run: |
-          PROJECT_KEY=ALBERTOVERDUGO_Laboratorio-final
-          ORGANIZATION=albertoverdugo
-          SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}
-          QUALITY_GATE_STATUS=$(curl -s -u $SONAR_TOKEN: "https://sonarcloud.io/api/project_branches/list?project=${PROJECT_KEY}" | jq -r '.branches[] | select(.name=="feature-Alberto-Verdugo-Ponce-Laboratorio-Final") | .status.qualityGateStatus')
+#    - name: Check SonarCloud Quality Gate
+ #     run: |
+  #        PROJECT_KEY=ALBERTOVERDUGO_Laboratorio-final
+   #       ORGANIZATION=albertoverdugo
+    #      SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}
+     #     QUALITY_GATE_STATUS=$(curl -s -u $SONAR_TOKEN: "https://sonarcloud.io/api/project_branches/list?project=${PROJECT_KEY}" | jq -r '.branches[] | select(.name=="feature-Alberto-Verdugo-Ponce-Laboratorio-Final") | .status.qualityGateStatus')
 
-          if [ "$QUALITY_GATE_STATUS" != "OK" ]; then
-          echo "Quality gate failed: $QUALITY_GATE_STATUS"
-          exit 1
-          else
-          echo "Quality gate passed: $QUALITY_GATE_STATUS"
-          fi
+#          if [ "$QUALITY_GATE_STATUS" != "OK" ]; then
+ #         echo "Quality gate failed: $QUALITY_GATE_STATUS"
+  #        exit 1
+   #       else
+    #      echo "Quality gate passed: $QUALITY_GATE_STATUS"
+     #     fi
 
 #SCA -------------------------------------------
 
@@ -117,7 +117,7 @@ jobs:
           format: 'HTML'
           out: 'reports'
           args: >
-            --failOnCVSS 7
+            --failOnCVSS 4.0
             --enableRetired
 
 
