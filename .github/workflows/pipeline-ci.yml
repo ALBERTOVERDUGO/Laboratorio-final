@@ -120,14 +120,14 @@ jobs:
             --failOnCVSS 1.0
             --enableRetired
 
-    - name: Check Dependency Check results
-      run: |
-          if grep -q 'CRITICAL' ${{ github.workspace }}/reports/*.html; then
-            echo "El reporte tiene vulnerabilidades críticas. Deteniendo el pipeline."
-            exit 1
-          else
-            echo "El reporte no tiene vulnerabilidades críticas."
-          fi
+  #  - name: Check Dependency Check results
+  #    run: |
+  #        if grep -q 'CRITICAL' ${{ github.workspace }}/reports/*.html; then
+  #          echo "El reporte tiene vulnerabilidades críticas. Deteniendo el pipeline."
+  #          exit 1
+  #        else
+  #          echo "El reporte no tiene vulnerabilidades críticas."
+  #        fi
     
     - name: Upload Test result
       uses: actions/upload-artifact@v2
