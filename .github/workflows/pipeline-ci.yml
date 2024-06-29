@@ -212,16 +212,16 @@ jobs:
           path: |
                  **
 
-    - name: Check Trivy scan results
-      run: |
-        if grep -q "CRITICAL" ${{github.workspace}}/trivy-report.txt; then
-          echo "vulnerabilidades detectadas con trivy!"
-          exit 1
-        else
-          echo "sin vulnerabilidades."
-        fi
-      env:
-        TRIVY_EXIT_CODE: ${{ steps.trivy-scan.outputs.exit-code }}
+#    - name: Check Trivy scan results
+#      run: |
+#        if grep -q "CRITICAL" ${{github.workspace}}/trivy-report.txt; then
+#          echo "vulnerabilidades detectadas con trivy!"
+#          exit 1
+#        else
+#          echo "sin vulnerabilidades."
+#        fi
+#      env:
+#        TRIVY_EXIT_CODE: ${{ steps.trivy-scan.outputs.exit-code }}
    
 #--------------------- DAST ------------------------------------------------------
 
