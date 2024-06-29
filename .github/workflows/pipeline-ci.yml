@@ -203,7 +203,7 @@ jobs:
       with:
         image-ref: 'albertoverdugo/laboratoriodevsecops-test:latest'
         format: 'table'
-        output: '${{github.workspace}}/trivy-report.txt'
+        output: 'trivy-report.txt'
 
     - name: Check Trivy scan results
       run: |
