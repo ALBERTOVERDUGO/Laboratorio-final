@@ -203,17 +203,21 @@ jobs:
       with:
         image-ref: 'albertoverdugo/laboratoriodevsecops-test:latest'
         format: 'table'
+        output: '${{github.workspace}}/trivy-report.txt'
 
     - name: Check Trivy scan results
       run: |
         if grep -q "CRITICAL" ${{github.workspace}}/trivy-report.txt; then
-          echo "Critical vulnerabilities found!"
+          echo "vulnerabilidades detectadas con trivy!"
           exit 1
         else
-          echo "No critical vulnerabilities found."
+          echo "sin vulnerabilidades."
         fi
       env:
         TRIVY_EXIT_CODE: ${{ steps.trivy-scan.outputs.exit-code }}
+   
+    - name: archivos y directorios
+      run: ls -l
 
 #--------------------- DAST ------------------------------------------------------
 
