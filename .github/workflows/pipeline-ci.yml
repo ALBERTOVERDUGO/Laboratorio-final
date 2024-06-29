@@ -205,11 +205,12 @@ jobs:
         format: 'table'
         output: 'trivy-report.txt'
 
-    - name: Crear artefacto
+    - name: crear artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ArtefactoCreado
-        path:  ${{github.workspace}}
+          name: Laboratorio-final-artifact-Ultimo  # Nombre del artefacto
+          path: |
+                 **
 
     - name: Check Trivy scan results
       run: |
