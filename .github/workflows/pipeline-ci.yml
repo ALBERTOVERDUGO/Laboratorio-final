@@ -205,6 +205,12 @@ jobs:
         format: 'table'
         output: 'trivy-report.txt'
 
+    - name: Crear artefacto
+      uses: actions/upload-artifact@v2
+      with:
+        name: ArtefactoCreado
+        path:  ${{github.workspace}}
+
     - name: Check Trivy scan results
       run: |
         if grep -q "CRITICAL" ${{github.workspace}}/trivy-report.txt; then
@@ -216,9 +222,6 @@ jobs:
       env:
         TRIVY_EXIT_CODE: ${{ steps.trivy-scan.outputs.exit-code }}
    
-    - name: archivos y directorios
-      run: ls -l
-
 #--------------------- DAST ------------------------------------------------------
 
  # DAST: 
